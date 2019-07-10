@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -103,10 +104,10 @@ public class ChampionTest {
 //        assertThat(championList.get(0), hasProperty("position", equalTo("탑")));
     }
 
-    //hasToString 활용 테스트
+    //hasToString 활용 테스트 - 수정 장성호
     @Test
     public void shouldHaveSomeChampName() {
-        List<String> champListNames = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가느", "블라디미르");
+        List<String> champListNames = Arrays.asList("루시안", "나미", "렉사이", "갈리오", "모르가느", "나서스", "나르");
 //        assertThat(champListNames.get(0), hasToString("루시안"));
     }
 
