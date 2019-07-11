@@ -66,7 +66,7 @@ public class UpperCaseCounterTest {
     }
 
     @Test
-    public void getNumberOfUpperCaseCharacterInString_return_6_for_ABCdefGHI012_with_numbers (){
+    public void getNumberOfUpperCaseCharacterInString_return_6_for_ABCdefGHI012_with_numbers (){ // 수정 - 김수진
         String str = "ABCdefGHI012";
         int result = upperCaseCounter.getNumberOfUpperCaseCharactersInString(str);
 
