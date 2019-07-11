@@ -134,5 +134,11 @@ public class ChampionTest {
         assertThat(testString1, equalToIgnoringWhiteSpace(testString2));
 
     }
+    //같은 타입의 값이 사용 되었는지
+    @Test
+    public void testSameType(){
 
+        assertThat(championList,instanceOf(ArrayList.class));
+    }
+    
 }
