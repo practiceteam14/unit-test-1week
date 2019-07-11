@@ -108,6 +108,7 @@ public class ChampionTest {
     @Test
     public void shouldHaveSomeChampName() {
         List<String> champListNames = Arrays.asList("루시안", "나미", "렉사이", "갈리오", "모르가느", "나서스", "나르");
+        for (String champListName : champListNames) assertThat(champListName.charAt(0), hasToString("나"));
 //        assertThat(champListNames.get(0), hasToString("루시안"));
     }
 
