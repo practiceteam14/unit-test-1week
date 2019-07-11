@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class ChampionTest {
     private List<Champion> championList = new ArrayList<Champion>();
 
@@ -26,25 +32,27 @@ public class ChampionTest {
         championList.add(supportChamp);
     }
 
-    //List<String>을 생성하고 값이 비어 있는지를 테스트 empty()
+    //List<String>을 생성하고 값이 비어 있는지를 테스트 empty() - 수정: 김영진
     @Test
     public void givenCollectionWhenEmptyCorrect() {
         List<String> emptyList = new ArrayList<>();
-//        assertThat(emptyList, empty());
+        //assertThat(emptyList, empty());
+        assertTrue(emptyList.isEmpty());  // assertTrue 사용해서 변화줌
     }
 
-    //notNullValue 활용한 테스트
+    //notNullValue 활용한 테스트 - 수정: 김영진
     @Test
     public void notNullCheck() {
-        String lck = "LCK";
-//        assertThat(lck, notNullValue());
+        String lck = "LCK won the rift rivals!";  //문자열 수정
+        assertThat(lck, notNullValue());
     }
 
-    //nullValue 활용한 테스트
+    //nullValue 활용한 테스트 - 수정: 김영진
     @Test
     public void givenStringWhenNullIsCorrect() {
         String lck = null;
-//        assertThat(lck, nullValue());
+        //assertThat(lck, nullValue());
+        assertThat(lck, is(nullValue()));  // is 사용해도 같은 결과인지 확인
     }
 
 
@@ -119,6 +127,22 @@ public class ChampionTest {
 //        String champName = filterdChampion.get().getName();
 //        assertTrue(champName.equals("다리우스"));
 //        assertThat("다리우스", is(champName));
+    }
+    
+    //공백을 제거한 상태에서도 두 값이 같은지 비교 - 김영진
+    @Test
+    public void testForWhiteSpace(){
+        String testString1 = "문도박사";
+        String testString2 = " 문도박사";
+
+        assertThat(testString1, equalToIgnoringWhiteSpace(testString2));
+
+    }
+    //같은 타입의 값이 사용 되었는지 - 김영진
+    @Test
+    public void testSameType(){
+
+        assertThat(championList,instanceOf(ArrayList.class));
     }
 
 }
