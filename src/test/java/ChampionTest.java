@@ -88,10 +88,12 @@ public class ChampionTest {
 //        assertThat(championList, hasSize(5));
     }
 
-    //서폿 챔피언은 타릭이어야 한다라는 조건으로 테스트 코드 작성
+    //서폿 챔피언은 타릭이어야 한다라는 조건으로 테스트 코드 작성 - 수정 장성호
     @Test
     public void shouldSupportChampionIsTaric() {
         Champion supportChamp = new Champion("타릭", "바텀");
+        assertThat("바텀", is(equalTo(championList.get(4).getPosition())));
+        assertThat("타릭", equalTo(championList.get(4).getName()));
 //        assertThat("타릭", is(supportChamp.getName()));
 //        assertThat("타릭", is(equalTo(supportChamp.getName())));
 //        assertThat("타릭", equalTo(supportChamp.getName()));
