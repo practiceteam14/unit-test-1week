@@ -77,7 +77,7 @@ public class ChampionTest {
     //anything 테스트
     @Test
     public void shouldNotErrorGetReference() {
-//        assertThat(championList.get(2), anything());
+       assertThat(championList.get(2), anything());
     }
 
     //객체 크기 검증 테스트 hasSize
@@ -97,9 +97,11 @@ public class ChampionTest {
 //        assertThat("타릭", equalTo(supportChamp.getName()));
     }
 
-    //hasProperty 활용하여 속성이 포함되어 있는지 테스트
+    //hasProperty 활용하여 속성이 포함되어 있는지 테스트 - 수정 장성호
     @Test
     public void shouldHasPropertyPosition() {
+        // create new mid Champion
+        Champion midChamp = new Champion("빅토르", "미드");
 //        assertThat(championList.get(0), hasProperty("position"));
 //        assertThat(championList.get(0), hasProperty("position", equalTo("탑")));
     }
