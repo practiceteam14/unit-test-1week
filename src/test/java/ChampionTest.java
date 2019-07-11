@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalToIgnoringWhiteSpace;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertTrue;
-
 public class ChampionTest {
     private List<Champion> championList = new ArrayList<Champion>();
 
@@ -125,20 +120,5 @@ public class ChampionTest {
 //        assertTrue(champName.equals("다리우스"));
 //        assertThat("다리우스", is(champName));
     }
-    //공백을 제거한 상태에서도 두 값이 같은지 비교
-    @Test
-    public void testForWhiteSpace(){
-        String testString1 = "문도박사";
-        String testString2 = " 문도박사";
 
-        assertThat(testString1, equalToIgnoringWhiteSpace(testString2));
-
-    }
-    //같은 타입의 값이 사용 되었는지
-    @Test
-    public void testSameType(){
-
-        assertThat(championList,instanceOf(ArrayList.class));
-    }
-    
 }
