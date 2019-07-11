@@ -104,6 +104,8 @@ public class ChampionTest {
         Champion midChamp = new Champion("빅토르", "미드");
         // But This Champion go any position
         midChamp.setPosition("미드, 탑, 바텀");
+        assertThat(midChamp, hasProperty("position"));
+        assertThat(midChamp, hasProperty("position", equalTo("미드")));
 //        assertThat(championList.get(0), hasProperty("position"));
 //        assertThat(championList.get(0), hasProperty("position", equalTo("탑")));
     }
