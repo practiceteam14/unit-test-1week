@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
@@ -57,27 +58,46 @@ public class ChampionTest {
     }
 
 
-    //문자열 관련 테스트 anyOf, containsString, endWith
+    //문자열 관련 테스트 anyOf, containsString, endWith - 수정: 김수진
     @Test
     public void testForRelatedString() {
-        String sampleString1 = "Player Focus";
+        String sampleString1 = "Player 1 Focus";
         String sampleString2 = "Player point";
         String startString = "Player";
         String endString = "point";
-//        assertThat(sampleString1, anyOf(startsWith(startString), containsString(endString)));
-//        assertThat(sampleString2, is(endsWith(endString)));
+
+        // anyOf 사용하여 테스트
+        assertThat(sampleString1, anyOf(startsWith(startString), containsString(endString)));
+        // allOf 사용하여 테스트
+        assertThat(sampleString2, allOf(startsWith(startString), containsString(endString)));
+        // not 사용하여 테스트
+        assertThat(sampleString1, not(startsWith("Players")));
+        // is 사용하여 테스트
+        assertThat(sampleString2, is(endsWith(endString)));
     }
 
-    //부동소수점 범위 closeTo 테스트
+    //부동소수점 범위 closeTo 테스트 - 수정: 김수진
     @Test
     public void testForFloatingPoint() {
-//        assertThat(3.14, closeTo(3, 0.2));
+        assertThat(3.14, closeTo(3, 0.2));
+        assertThat(31.4, closeTo(31, 0.5));
+        assertThat(314.0, closeTo(300, 20));
     }
 
-    //anything 테스트
+    //anything 테스트 - 수정: 김수진
     @Test
     public void shouldNotErrorGetReference() {
-       assertThat(championList.get(2), anything());
+        assertThat(championList.get(2), anything());
+
+        // championList의 크기를 벗어나 불러올 수 없는 값을 가져오려 할 때, 실패하는지 테스트
+        System.out.println(championList.size());
+        // assertThat(championList.get(7), anything());
+
+        // 불러올 수 있는 범위이면 항상 성공
+        assertThat(championList.get(0), anything());
+        assertThat(championList.get(1), anything());
+        assertThat(championList.get(3), anything());
+        assertThat(championList.get(4), anything());
     }
 
     //객체 크기 검증 테스트 hasSize
@@ -154,5 +174,36 @@ public class ChampionTest {
 
         assertThat(championList,instanceOf(ArrayList.class));
     }
+
+    // 대소문자가 달라도 같은 것으로 판단하여 비교 - 김수진
+    @Test
+    public void equalToIgnoringCaseTest() {
+        String testString1 = "AbCdEfG";
+        String testString2 = "aBcDeFg";
+
+        assertThat(testString1, equalToIgnoringCase(testString2));
+    }
+
+    // @Ignore로 인해 테스트를 진행하지 않는지 확인 - 김수진
+    @Ignore
+    @Test
+    public void IgnoreTest(){
+        System.out.println("이 테스트는 무시한다.");
+    }
+
+    // 같은 인스턴스인지 테스트 - 김수진
+    @Test
+    public void sameInstanceTest() {
+        assertThat("Test", sameInstance("Test"));
+        assertThat("Test", not(sameInstance("Not Same Test")));
+    }
+
+    // hasItem 및 hasItems 테스트 - 김수진
+    @Test
+    public void hasItemTest() {
+        assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItem("모르가나"));
+        assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItems("모르가나", "애쉬"));
+    }
+
 
 }
