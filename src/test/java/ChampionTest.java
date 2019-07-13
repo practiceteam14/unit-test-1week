@@ -1,3 +1,4 @@
+import org.hamcrest.collection.IsMapContaining;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -235,5 +236,16 @@ public class ChampionTest {
         }
         assertThat(champNums,greaterThan(1));
         assertThat(champNums,greaterThanOrEqualTo(2));
+    }
+
+    //챔피언이 포함되어있는지 Map 형태에서 검색하는 테스트 - 전병재
+    @Test
+    public void isChampionMapContainingTest(){
+        Map<String,String> ChampionMap=new HashMap<>();
+        ChampionMap.put("신짜오","정글");
+        ChampionMap.put("루시안","바텀");
+        ChampionMap.put("스웨인","바텀");
+        assertThat(ChampionMap, IsMapContaining.hasKey("바텀"));
+        assertThat(ChampionMap, IsMapContaining.hasEntry("스웨인","바텀"));
     }
 }
