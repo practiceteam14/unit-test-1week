@@ -142,11 +142,13 @@ public class ChampionTest {
 //        assertThat(champListNames.get(0), hasToString("루시안"));
     }
 
-    //property와 value가 같은지 테스트
+    //property와 value가 같은지 테스트 - 수정 전병재
     @Test
     public void shouldHaveSamePropertyAndValue() {
         List<String> championNames1 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
         List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
+        assertEquals(championNames1,championNames2);// assertEquals 사용
+        assertThat(championNames1,samePropertyValuesAs(championNames2));
 //        assertThat(championNames1, samePropertyValuesAs(championNames2));
     }
 
