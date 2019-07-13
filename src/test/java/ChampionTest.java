@@ -1,17 +1,14 @@
+import org.hamcrest.collection.IsMapContaining;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ChampionTest {
     private List<Champion> championList = new ArrayList<Champion>();
@@ -100,9 +97,15 @@ public class ChampionTest {
         assertThat(championList.get(4), anything());
     }
 
-    //객체 크기 검증 테스트 hasSize
+    //객체 크기 검증 테스트 hasSize - 수정 전병재
     @Test
     public void shouldChampionCountFive() {
+        assertThat(championList.size(),equalTo(5)); //원래는 5명
+        Champion newSupChamp= new Champion("스웨인","바텀");
+        championList.add(newSupChamp);  // 챔피언 하나 추가
+        assertThat(championList.size(),is(6)); //추가했더니 6명
+        championList.remove(newSupChamp); //챔피언 다시 제거
+        assertThat(championList,hasSize(5)); //제거 했더니 다시 5명
 //        assertTrue(championList.size() == 5);
 //        assertThat(championList.size(), is(5));
 //        assertThat(championList, hasSize(5));
@@ -140,17 +143,25 @@ public class ChampionTest {
 //        assertThat(champListNames.get(0), hasToString("루시안"));
     }
 
-    //property와 value가 같은지 테스트
+    //property와 value가 같은지 테스트 - 수정 전병재
     @Test
     public void shouldHaveSamePropertyAndValue() {
         List<String> championNames1 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
         List<String> championNames2 = Arrays.asList("루시안", "애쉬", "렉사이", "갈리오", "모르가나", "블라디미르");
+        assertEquals(championNames1,championNames2);// assertEquals 사용
+        assertThat(championNames1,samePropertyValuesAs(championNames2));
 //        assertThat(championNames1, samePropertyValuesAs(championNames2));
     }
 
-    //탑 챔피언은 다리우스여야 한다라는 조건으로 테스트 코드 작성, stream 활용예
+    //바텀 첫번째 챔피언은 베인이여야 한다라는 조건으로 테스트 코드 작성, stream 활용예 - 수정 전병재
     @Test
-    public void shouldTopChampionIsDarius() {
+    public void shouldTopChampionIsVayne() {
+        Optional<Champion> selectedChampion = championList.stream()
+                .filter(c->c.getPosition().equals("바텀"))
+                .findFirst();
+        String champ=selectedChampion.get().getName();
+        assertThat(champ,is("베인")); // Position이 바텀인 두 챔피언중 첫번째인 베인만 찾음
+
 //        Optional<Champion> filterdChampion = championList.stream()
 //                .filter(c -> c.getPosition().equals("탑"))
 //                .findFirst();
@@ -158,7 +169,10 @@ public class ChampionTest {
 //        assertTrue(champName.equals("다리우스"));
 //        assertThat("다리우스", is(champName));
     }
-    
+
+    ////////////////////////
+    // 새로 추가된 테스트들
+    ////////////////////////
     //공백을 제거한 상태에서도 두 값이 같은지 비교 - 김영진
     @Test
     public void testForWhiteSpace(){
@@ -205,5 +219,33 @@ public class ChampionTest {
         assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItems("모르가나", "애쉬"));
     }
 
+    //hasItemInArray 테스트 - 전병재
+    @Test
+    public void hasChampioninArrayTest(){
+        String[] todayChampionLists={"티모","스웨인","루시안","아트룩스","나서스"};
+        assertThat(todayChampionLists,hasItemInArray(equalTo("티모")));
+        assertThat(todayChampionLists,hasItemInArray(not("베인")));
+    }
 
+    //이름에 "리"가 들어간 챔피언 수가 하나 이상인지 테스트 - 전병재
+    @Test
+    public void hasGreaterChampionsThanTest(){
+        int champNums=0;
+        for(Champion c:championList){
+            if(c.getName().contains("리"))   champNums++;
+        }
+        assertThat(champNums,greaterThan(1));
+        assertThat(champNums,greaterThanOrEqualTo(2));
+    }
+
+    //챔피언이 포함되어있는지 Map 형태에서 검색하는 테스트 - 전병재
+    @Test
+    public void isChampionMapContainingTest(){
+        Map<String,String> ChampionMap=new HashMap<>();
+        ChampionMap.put("신짜오","정글");
+        ChampionMap.put("루시안","바텀");
+        ChampionMap.put("스웨인","바텀");
+        assertThat(ChampionMap, IsMapContaining.hasKey("바텀"));
+        assertThat(ChampionMap, IsMapContaining.hasEntry("스웨인","바텀"));
+    }
 }
