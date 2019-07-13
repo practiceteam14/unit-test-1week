@@ -168,7 +168,10 @@ public class ChampionTest {
 //        assertTrue(champName.equals("다리우스"));
 //        assertThat("다리우스", is(champName));
     }
-    
+
+    ////////////////////////
+    // 새로 추가된 테스트들
+    ////////////////////////
     //공백을 제거한 상태에서도 두 값이 같은지 비교 - 김영진
     @Test
     public void testForWhiteSpace(){
@@ -215,4 +218,11 @@ public class ChampionTest {
         assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItems("모르가나", "애쉬"));
     }
 
+    //hasItemInArray 테스트 - 전병재
+    @Test
+    public void hasChampioninArrayTest(){
+        String[] todayChampionLists={"티모","스웨인","루시안","아트룩스","나서스"};
+        assertThat(todayChampionLists,hasItemInArray(equalTo("티모")));
+        assertThat(todayChampionLists,hasItemInArray(not("베인")));
+    }
 }
