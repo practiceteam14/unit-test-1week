@@ -99,7 +99,12 @@ public class ChampionTest {
     //객체 크기 검증 테스트 hasSize - 수정 전병재
     @Test
     public void shouldChampionCountFive() {
-        assertThat(championList.size(),equalTo(5));
+        assertThat(championList.size(),equalTo(5)); //원래는 5명
+        Champion newSupChamp= new Champion("스웨인","바텀");
+        championList.add(newSupChamp);  // 챔피언 하나 추가
+        assertThat(championList.size(),is(6)); //추가했더니 6명
+        championList.remove(newSupChamp); //챔피언 다시 제거
+        assertThat(championList,hasSize(5)); //제거 했더니 다시 5명
 //        assertTrue(championList.size() == 5);
 //        assertThat(championList.size(), is(5));
 //        assertThat(championList, hasSize(5));
