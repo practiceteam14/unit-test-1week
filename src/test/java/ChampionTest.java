@@ -225,4 +225,15 @@ public class ChampionTest {
         assertThat(todayChampionLists,hasItemInArray(equalTo("티모")));
         assertThat(todayChampionLists,hasItemInArray(not("베인")));
     }
+
+    //이름에 "리"가 들어간 챔피언 수가 하나 이상인지 테스트 - 전병재
+    @Test
+    public void hasGreaterChampionsThanTest(){
+        int champNums=0;
+        for(Champion c:championList){
+            if(c.getName().contains("리"))   champNums++;
+        }
+        assertThat(champNums,greaterThan(1));
+        assertThat(champNums,greaterThanOrEqualTo(2));
+    }
 }
