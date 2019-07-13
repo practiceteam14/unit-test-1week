@@ -2,16 +2,12 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ChampionTest {
     private List<Champion> championList = new ArrayList<Champion>();
@@ -100,9 +96,10 @@ public class ChampionTest {
         assertThat(championList.get(4), anything());
     }
 
-    //객체 크기 검증 테스트 hasSize
+    //객체 크기 검증 테스트 hasSize - 수정 전병재
     @Test
     public void shouldChampionCountFive() {
+        assertThat(championList.size(),equalTo(5));
 //        assertTrue(championList.size() == 5);
 //        assertThat(championList.size(), is(5));
 //        assertThat(championList, hasSize(5));
@@ -204,6 +201,5 @@ public class ChampionTest {
         assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItem("모르가나"));
         assertThat(Arrays.asList("모르가나", "애쉬", "갈리오"), hasItems("모르가나", "애쉬"));
     }
-
 
 }
